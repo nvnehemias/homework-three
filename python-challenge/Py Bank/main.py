@@ -2,6 +2,7 @@ import os
 import csv
 total = 0
 sumtotal = 0
+sum = 0
 mylist = []
 #list used for difference and month matching
 mylist2 = []
@@ -37,7 +38,6 @@ with open(csvpath, newline = "") as csvfile:
         mylist.append(row)
     print("Total months: ", total)
     print("Total: $",sumtotal)
-    #print(mylist)
 
 
     #---------------------The average of the changes in "Profit/Losses" over the entire period-----------------------------------------
@@ -48,16 +48,30 @@ with open(csvpath, newline = "") as csvfile:
             mymonth = mylist[i][0] #takes the month
             match = [mymonth,difference] #matches month with difference value
         mylist2.append(match) #add the match and month to the list mylist2
-    
+
+    #for loop that takes the average of the changes in "Profit/Losses" over the entire period
     for j in range(len(mylist2)):
-        if mylist2[i][1]
-    print(mylist2)
-    #summ = sum(mylist2)
-    #longlist = len(mylist2)
-    #Average = summ/longlist
-    #greatest = max(mylist2)
-    #least = min(mylist2)
-    #The average of the changes in "Profit/Losses" over the entire period
-    #print("Average Change: $",Average)
-    #print("Greatest Increase in Profits: $",greatest)
-    #print("Greatest Decrease in Profits: $",least)
+        sum = sum + int(mylist2[j][1])
+    averagee = sum/len(mylist2)
+    average = round(averagee,2) 
+
+    #for loop and if statement that finds the greatest value and the corresponding month 
+    maxvalue = mylist2[0][1]
+    maxmonth = mylist2[0][0]
+    for k in range(1,len(mylist2)):
+        if int(mylist2[k][1]) > int(maxvalue):
+            maxvalue = mylist2[k][1]
+            maxmonth = mylist2[k][0] 
+
+    #fore loop and if statement that finds the Greatest Decrease in Profit and the corresponding month
+    minvalue = mylist2[0][1]
+    minmonth = mylist2[0][0]
+    for h in range(1,len(mylist2)):
+        if int(mylist2[h][1]) < int(minvalue):
+            minvalue = mylist2[h][1]
+            minmonth = mylist2[h][0] 
+
+
+    print("Average Change: $",average)
+    print("Greatest Increase in Profits:",maxmonth,"($",maxvalue,")")
+    print("Greatest Decrease in Profits:",minmonth,"($",minvalue,")")
