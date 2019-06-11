@@ -1,7 +1,10 @@
 import os 
 import csv
+#total will be used to sum the total number of months
 total = 0
+#sumtotal will be the sum of profit/losses over the entire period
 sumtotal = 0
+
 sum = 0
 mylist = []
 #list used for difference and month matching
@@ -63,7 +66,7 @@ with open(csvpath, newline = "") as csvfile:
             maxvalue = mylist2[k][1]
             maxmonth = mylist2[k][0] 
 
-    #fore loop and if statement that finds the Greatest Decrease in Profit and the corresponding month
+    #for loop and if statement that finds the Greatest Decrease in Profit and the corresponding month
     minvalue = mylist2[0][1]
     minmonth = mylist2[0][0]
     for h in range(1,len(mylist2)):
