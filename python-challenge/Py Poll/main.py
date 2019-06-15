@@ -55,7 +55,7 @@ with open(csvpath,newline="") as csvfile:
 
 
 #Export a text file    
-file = "PyBank_Report.txt"
+file = "PyPoll_Report.txt"
 with open(file,'w') as f:
     print("Election Results",file = f)
     print("---------------------------",file = f)
