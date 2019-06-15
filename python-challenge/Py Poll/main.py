@@ -25,6 +25,7 @@ with open(csvpath,newline="") as csvfile:
     #for loop that runs through the list totalrows and add up the number of votes
     for i in range(len(totalrows)):
         x = x + 1
+    
     print("Election Results")
     print("---------------------------")
     print("Total Votes: ",x)
