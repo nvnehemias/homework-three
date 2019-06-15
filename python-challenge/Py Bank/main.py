@@ -68,10 +68,15 @@ with open(csvpath, newline = "") as csvfile:
             minvalue = listrows2[h][1]
             minmonth = listrows2[h][0] 
 
-    print("Financial Analysis")
-    print("------------------------------")
-    print("Total months: ", monthtotal)
-    print("Total: $",sumtotal)
-    print("Average Change: $",finalaverage)
-    print("Greatest Increase in Profits:",maxmonth,"($",maxvalue,")")
-    print("Greatest Decrease in Profits:",minmonth,"($",minvalue,")")
+#Export a text file    
+file = "PyBank_Report.txt"
+with open(file,'w') as f:
+    print("Financial Analysis",file = f)
+    print("------------------------------",file = f)
+    print("Total months: ", monthtotal,file = f)
+    print("Total: $",sumtotal, file = f)
+    print("Average Change: $",finalaverage,file = f)
+    print("Greatest Increase in Profits:",maxmonth,"($",maxvalue,")",file = f)
+    print("Greatest Decrease in Profits:",minmonth,"($",minvalue,")", file = f)
+
+    f.close()

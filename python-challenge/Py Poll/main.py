@@ -54,15 +54,19 @@ with open(csvpath,newline="") as csvfile:
         name = "O'Tooley"
 
 
-    #print the results
-    print("Election Results")
-    print("---------------------------")
-    print("Total Votes: ",x)
-    print("---------------------------")
-    print("Khan: ","{0:.3f}%".format(a/len(totalrows) * 100),"(",a,")")
-    print("Correy: ","{0:.3f}%".format(b/len(totalrows) * 100),"(",b,")")
-    print("Li: ","{0:.3f}%".format(c/len(totalrows) * 100),"(",c,")")
-    print("O'Tooley: ","{0:.3f}%".format(d/len(totalrows) * 100),"(",d,")")     
-    print("---------------------------")
-    print("Winner: ",name)
-    print("---------------------------")
+#Export a text file    
+file = "PyBank_Report.txt"
+with open(file,'w') as f:
+    print("Election Results",file = f)
+    print("---------------------------",file = f)
+    print("Total Votes: ",x,file = f)
+    print("---------------------------", file = f)
+    print("Khan: ","{0:.3f}%".format(a/len(totalrows) * 100),"(",a,")",file = f)
+    print("Correy: ","{0:.3f}%".format(b/len(totalrows) * 100),"(",b,")",file = f)
+    print("Li: ","{0:.3f}%".format(c/len(totalrows) * 100),"(",c,")", file = f)
+    print("O'Tooley: ","{0:.3f}%".format(d/len(totalrows) * 100),"(",d,")", file = f)     
+    print("---------------------------",file = f)
+    print("Winner: ",name, file = f)
+    print("---------------------------",file = f)
+
+    f.close()
