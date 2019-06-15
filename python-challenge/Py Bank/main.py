@@ -6,7 +6,7 @@ monthtotal = 0
 sumtotal = 0
 #sums will be used in the equation for the average change 
 sums = 0
-#listrows  will be used for storing the profit/losses over the entire period
+#listrows  will be used for storing rows in a list
 listrows = []
 #mylist2 used for difference and month matching
 listrows2 = []
@@ -20,7 +20,7 @@ with open(csvpath, newline = "") as csvfile:
     #reads the files
     csvreader = csv.reader(csvfile,delimiter = ",")
 
-    #header will take in the name of the columns in the first row 
+    #header will take in the name of the columns in the first row. The cursor is now on the first first row with values that we will work with. 
     header = next(csvreader)
 
     #loop that runs through csvfile 
@@ -37,8 +37,7 @@ with open(csvpath, newline = "") as csvfile:
             monthtotal = monthtotal + 1
 
         #adds up the profits 
-        profit_loss = int(row[1])
-        sumtotal = sumtotal + profit_loss
+        sumtotal = sumtotal + int(row[1])
 
     #---------------------The average of the changes in "Profit/Losses" over the entire period-----------------------------------------
     for i in range(1,len(listrows)):
@@ -50,8 +49,8 @@ with open(csvpath, newline = "") as csvfile:
     #for loop that takes the average of the changes in "Profit/Losses" over the entire period
     for j in range(len(listrows2)):
         sums = sums + int(listrows2[j][1])
-    averagee = sums/len(listrows2)
-    average = round(averagee,2) 
+    average1 = sums/len(listrows2)
+    finalaverage = round(average1,2) 
 
     #for loop and if statement that finds the greatest value and the corresponding month 
     maxvalue = listrows2[0][1]
@@ -73,6 +72,6 @@ with open(csvpath, newline = "") as csvfile:
     print("------------------------------")
     print("Total months: ", monthtotal)
     print("Total: $",sumtotal)
-    print("Average Change: $",average)
+    print("Average Change: $",finalaverage)
     print("Greatest Increase in Profits:",maxmonth,"($",maxvalue,")")
     print("Greatest Decrease in Profits:",minmonth,"($",minvalue,")")

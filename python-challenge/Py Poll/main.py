@@ -15,23 +15,21 @@ with open(csvpath,newline="") as csvfile:
     #reads the files
     csvreader = csv.reader(csvfile,delimiter = ",")
 
-    #create a list that has the voter id and candidate
+    #takes the header of the csv file and saves it. The cursor is now on the second row that has initial values we need to work with. 
+    header = next(csvreader)
+
+    
     for row in csvreader:
+        #create a list that has the voter id and candidate
         totalrows.append([row[0],row[2]])
     
-    #removes the title from the list we created when adding the first column with the third column from the csv file
-    totalrows.remove(['Voter ID', 'Candidate'])
 
     #for loop that runs through the list totalrows and add up the number of votes
     for i in range(len(totalrows)):
         x = x + 1
     
-    print("Election Results")
-    print("---------------------------")
-    print("Total Votes: ",x)
-    print("---------------------------")
 
-    #The total number of votes each candidate won
+    #The total number of votes each candidate received 
     for j in range(len(totalrows)):
         if totalrows[j][1] == "Khan":
             a = a + 1
@@ -57,6 +55,10 @@ with open(csvpath,newline="") as csvfile:
 
 
     #print the results
+    print("Election Results")
+    print("---------------------------")
+    print("Total Votes: ",x)
+    print("---------------------------")
     print("Khan: ","{0:.3f}%".format(a/len(totalrows) * 100),"(",a,")")
     print("Correy: ","{0:.3f}%".format(b/len(totalrows) * 100),"(",b,")")
     print("Li: ","{0:.3f}%".format(c/len(totalrows) * 100),"(",c,")")
