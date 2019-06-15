@@ -8,7 +8,6 @@ b = 0
 c = 0
 d = 0
 
-
 csvpath = os.path.join("..","03-Python_Homework_PyPoll_Resources_election_data.csv")
 
 with open(csvpath,newline="") as csvfile:
@@ -18,26 +17,17 @@ with open(csvpath,newline="") as csvfile:
     #takes the header of the csv file and saves it. The cursor is now on the second row that has initial values we need to work with. 
     header = next(csvreader)
 
-    
     for row in csvreader:
-        #create a list that has the voter id and candidate
-        totalrows.append([row[0],row[2]])
-    
-
-    #for loop that runs through the list totalrows and add up the number of votes
-    for i in range(len(totalrows)):
+        #counts the total number of votes
         x = x + 1
-    
-
-    #The total number of votes each candidate received 
-    for j in range(len(totalrows)):
-        if totalrows[j][1] == "Khan":
+        #if statement that adds up the total number of votes for each candidate
+        if row[2] == 'Khan':
             a = a + 1
-        elif totalrows[j][1] == "Correy":
+        elif row[2] == 'Correy':
             b = b + 1
-        elif totalrows[j][1] == "Li":
+        elif row[2] == 'Li':
             c = c + 1
-        else:
+        else: 
             d = d + 1
 
     #find the max number of votes by candidate
@@ -53,6 +43,16 @@ with open(csvpath,newline="") as csvfile:
     else:
         name = "O'Tooley"
 
+print("Election Results")
+print("---------------------------")
+print("Total Votes: ",x)
+print("Khan: ","{0:.3f}%".format(a/x * 100),"(",a,")")
+print("Correy: ","{0:.3f}%".format(b/x * 100),"(",b,")")
+print("Li: ","{0:.3f}%".format(c/x * 100),"(",c,")")
+print("O'Tooley: ","{0:.3f}%".format(d/x * 100),"(",d,")")
+print("---------------------------")
+print("Winner: ",name)
+print("---------------------------")
 
 #Export a text file    
 file = "PyPoll_Report.txt"
@@ -61,12 +61,11 @@ with open(file,'w') as f:
     print("---------------------------",file = f)
     print("Total Votes: ",x,file = f)
     print("---------------------------", file = f)
-    print("Khan: ","{0:.3f}%".format(a/len(totalrows) * 100),"(",a,")",file = f)
-    print("Correy: ","{0:.3f}%".format(b/len(totalrows) * 100),"(",b,")",file = f)
-    print("Li: ","{0:.3f}%".format(c/len(totalrows) * 100),"(",c,")", file = f)
-    print("O'Tooley: ","{0:.3f}%".format(d/len(totalrows) * 100),"(",d,")", file = f)     
+    print("Khan: ","{0:.3f}%".format(a/x * 100),"(",a,")",file = f)
+    print("Correy: ","{0:.3f}%".format(b/x * 100),"(",b,")",file = f)
+    print("Li: ","{0:.3f}%".format(c/x * 100),"(",c,")", file = f)
+    print("O'Tooley: ","{0:.3f}%".format(d/x * 100),"(",d,")", file = f)      
     print("---------------------------",file = f)
-    print("Winner: ",name, file = f)
-    print("---------------------------",file = f)
-
+    print("Winner: ",name,file = f)
+    print("---------------------------", file = f)
     f.close()
