@@ -4,15 +4,16 @@ import csv
 monthtotal = 0
 #sumtotal will be the sum of profit/losses over the entire period
 sumtotal = 0
-#sums will be used in the equation for the average change 
-sums = 0
 #listrows  will be used for storing rows in a list
 listrows = []
 #mylist2 used for difference and month matching
 listrows2 = []
 #allmonths is a list of all the months 
 allmonths = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
-
+#sum that will be used in calculating average
+sum1 = 0
+#y will be used as a placeholder
+y = 0
 csvpath = os.path.join("..","03-Python_Homework_PyBank_Resources_budget_data.csv")
 
 with open(csvpath, newline = "") as csvfile:
@@ -40,17 +41,17 @@ with open(csvpath, newline = "") as csvfile:
         sumtotal = sumtotal + int(row[1])
 
     #---------------------The average of the changes in "Profit/Losses" over the entire period-----------------------------------------
-    for i in range(1,len(listrows)):
-        #taking the difference of the two "Profit/Losses" and saving them to a list. From that list created we find the max, min, and average
-        difference = int(listrows[i][1]) - int(listrows[i-1][1])
-        mymonth = listrows[i][0] #takes the month corresponding to the difference
-        listrows2.append([mymonth,difference]) 
-
-    #for loop that takes the average of the changes in "Profit/Losses" over the entire period
-    for j in range(len(listrows2)):
-        sums = sums + int(listrows2[j][1])
-    average1 = sums/len(listrows2)
-    finalaverage = round(average1,2) 
+    for i in range(1,len(listrows)): 
+        #taking the difference of the previous "Profit/Losses" to the current "Profit/Losses".
+        difference = int(listrows[i][1]) - int(listrows[i-1][1]) 
+        #adds up the difference
+        sum1 = sum1 + difference 
+        #keeps count and will be used in dividing the sum1
+        y = y + 1 
+        #adds the current month and difference to listrows2
+        listrows2.append([listrows[i][0],difference]) 
+    #calculate average
+    averages = round(sum1/y,2)
 
     #for loop and if statement that finds the greatest value and the corresponding month 
     maxvalue = listrows2[0][1]
@@ -72,7 +73,7 @@ print("Financial Analysis")
 print("------------------------------")
 print("Total months: ", monthtotal)
 print("Total: $",sumtotal)
-print("Average Change: $",finalaverage)
+print("Average Change: $",averages)
 print("Greatest Increase in Profits:",maxmonth,"($",maxvalue,")")
 print("Greatest Decrease in Profits:",minmonth,"($",minvalue,")")
 
@@ -83,7 +84,7 @@ with open(file,'w') as f:
     print("------------------------------",file = f)
     print("Total months: ", monthtotal,file = f)
     print("Total: $",sumtotal, file = f)
-    print("Average Change: $",finalaverage,file = f)
+    print("Average Change: $",averages,file = f)
     print("Greatest Increase in Profits:",maxmonth,"($",maxvalue,")",file = f)
     print("Greatest Decrease in Profits:",minmonth,"($",minvalue,")", file = f)
 
